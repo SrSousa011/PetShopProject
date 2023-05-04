@@ -4,11 +4,17 @@ import com.petshop.jwt.dao.RoleDao;
 import com.petshop.jwt.dao.UserDao;
 import com.petshop.jwt.entity.Role;
 import com.petshop.jwt.entity.User;
+import com.petshop.jwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,6 +27,9 @@ public class UserService {
     private RoleDao roleDao;
 
     @Autowired
+    private UserRepository repository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void initRoleAndUser() {
@@ -30,19 +39,14 @@ public class UserService {
         adminRole.setRoleDescription("Admin role");
         roleDao.save(adminRole);
 
-        Role adminRole2 = new Role();
-        adminRole2.setRoleName("Admin");
-        adminRole2.setRoleDescription("Admin Role");
-        roleDao.save(adminRole2);
-
         Role userRole = new Role();
         userRole.setRoleName("User");
         userRole.setRoleDescription("Default role for newly created record");
         roleDao.save(userRole);
 
         User adminUser = new User();
-        adminUser.setUserName("admin123");
-        adminUser.setUserPassword(getEncodedPassword("admin@pass"));
+        adminUser.setUsername("admin123");
+        adminUser.setPassword(getEncodedPassword("admin@pass"));
         adminUser.setUserFirstName("admin");
         adminUser.setUserLastName("admin");
         Set<Role> adminRoles = new HashSet<>();
@@ -50,21 +54,11 @@ public class UserService {
         adminUser.setRole(adminRoles);
         userDao.save(adminUser);
 
-        User adminLucas = new User();
-        adminLucas.setUserName("lucas");
-        adminLucas.setUserPassword(getEncodedPassword("dummy"));
-        adminLucas.setUserFirstName("Lucas");
-        adminLucas.setUserLastName("Sousa");
-        Set<Role> adminRoles2 = new HashSet<>();
-        adminRoles2.add(adminRole2);
-        adminLucas.setRole(adminRoles2);
-        userDao.save(adminLucas);
-
         User user = new User();
-        user.setUserName("raj123");
-        user.setUserPassword(getEncodedPassword("raj@123"));
-        user.setUserFirstName("raj");
-        user.setUserLastName("sharma");
+        user.setUsername("user");
+        user.setPassword(getEncodedPassword("user@pass3"));
+        user.setUserFirstName("User");
+        user.setUserLastName("Test");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
         user.setRole(userRoles);
@@ -76,7 +70,7 @@ public class UserService {
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(role);
         user.setRole(userRoles);
-        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+        user.setPassword(getEncodedPassword(user.getPassword()));
 
         return userDao.save(user);
     }
@@ -84,4 +78,51 @@ public class UserService {
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
     }
+
+    @Autowired
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    @Transactional
+    public void delete(User user) {
+        repository.delete(user);
+    }
+
+
+
+    public Page<User> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+
+    public Optional<User> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public List<User> findAll() {
+        return repository.findAll();
+    }
+
+
+
+    public User create(User user) {
+        return repository.save(user);
+    }
+
+    public User update(User user) {
+        return repository.save(user);
+    }
+
+
+    public boolean existsByCpf(String cpf) {
+        return repository.existsByCpf(cpf);
+    }
+
+    public boolean existsByUsername(String username) {
+        return repository.existsByUsername(username);
+    }
+
+
+
 }
