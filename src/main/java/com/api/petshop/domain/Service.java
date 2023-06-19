@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_atendimento")
+@Table(name = "tbl_service")
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long atendimento_id;
+    private Long service_id;
 
     private Date date;
 
@@ -17,8 +17,8 @@ public class Service {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    public Service(Long atendimento_id, Date date, Pet pet) {
-        this.atendimento_id = atendimento_id;
+    public Service(Long service_id, Date date, Pet pet) {
+        this.service_id = service_id;
         this.date = date;
         this.pet = pet;
     }
@@ -27,12 +27,12 @@ public class Service {
 
     }
 
-    public Long getAtendimento_id() {
-        return atendimento_id;
+    public Long getService_id() {
+        return service_id;
     }
 
-    public void setAtendimento_id(Long id) {
-        this.atendimento_id = id;
+    public void setService_id(Long id) {
+        this.service_id = id;
     }
 
     public Date getDate() {

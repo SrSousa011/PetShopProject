@@ -3,7 +3,7 @@ package com.api.petshop.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tbl_endereco")
+@Table(name = "tbl_address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

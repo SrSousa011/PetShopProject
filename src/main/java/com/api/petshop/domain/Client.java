@@ -5,19 +5,19 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "tbl_clients")
+@Table(name = "tbl_client")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String name;
 
-    public Client(Long id, String nome, Address address, List<Contact> contatos, List<Pet> pets) {
+    public Client(Long id, String name, Address address, List<Contact> contacts, List<Pet> pets) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.address = address;
-        this.contatos = contatos;
+        this.contacts = contacts;
         this.pets = pets;
     }
 
@@ -33,12 +33,12 @@ public class Client {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     public Address getEndereco() {
@@ -65,19 +65,19 @@ public class Client {
         this.pets = pets;
     }
 
-    public List<Contact> getContatos() {
-        return contatos;
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
-    public void setContatos(List<Contact> contatos) {
-        this.contatos = contatos;
+    public void setContacts(List<Contact> contatos) {
+        this.contacts = contatos;
     }
 
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Contact> contatos;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Contact> contacts;
 
 
     @OneToMany(mappedBy = "owner")

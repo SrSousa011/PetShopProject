@@ -2,8 +2,6 @@ package com.api.petshop.domain;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "tbl_contact")
 public class Contact {
@@ -14,10 +12,10 @@ public class Contact {
     private String email;
 
 
-    public Contact(Long contact_id, String email, Client cliente) {
+    public Contact(Long contact_id, String email, Client client) {
         this.contact_id = contact_id;
         this.email = email;
-        this.cliente = cliente;
+        this.client = client;
     }
 
     public Contact() {
@@ -40,17 +38,17 @@ public class Contact {
         this.email = email;
     }
 
-    public Client getCliente() {
-        return cliente;
+    public Client getClient() {
+        return client;
     }
 
-    public void setCliente(Client cliente) {
-        this.cliente = cliente;
+    public void setClient(Client cliente) {
+        this.client = cliente;
     }
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Client cliente;
+    private Client client;
 }
 
 
