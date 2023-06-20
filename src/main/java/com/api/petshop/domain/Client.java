@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -12,19 +14,20 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "tbl_client")
-public class Client {
+public class Client extends RepresentationModel<Client> implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long client_id;
 
     private String name;
 
-    public Long getId() {
-        return id;
+    public Long getClient_id() {
+        return client_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClient_id(Long id) {
+        this.client_id = id;
     }
 
     public String getName() {
@@ -61,11 +64,11 @@ public class Client {
 
     @Column(name = "address_id")
     private Long addressId;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
     private List<Contact> contacts;
 
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     private List<Pet> pets;
 }
 
