@@ -4,6 +4,7 @@ import com.api.petshop.domain.User;
 import com.api.petshop.dtos.UserRecordDto;
 import com.api.petshop.repositories.UserRepository;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(value = "API REST Pets")
 public class UserController {
     @Autowired
     UserRepository userRepository;
 
     @GetMapping("/users")
+    @ApiOperation(value="Retorna uma lista de usuários")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> userList = userRepository.findAll();
         if(!userList.isEmpty()) {
@@ -38,6 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
+    @ApiOperation(value="Retorna um usuário pelo ID")
     public ResponseEntity<Object> getOneUser(@PathVariable(value="id") long id){
         Optional<User> user0 = userRepository.findById(id);
         if(user0.isEmpty()) {
@@ -49,6 +53,7 @@ public class UserController {
 
 
     @PostMapping("/users")
+    @ApiOperation(value="Cria um novo usuário")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRecordDto userRecordDto) {
         var user = new User();
         BeanUtils.copyProperties(userRecordDto, user);
@@ -57,6 +62,7 @@ public class UserController {
 
 
     @DeleteMapping("/user/{id}")
+    @ApiOperation(value="Exclui um usuário")
     public ResponseEntity<Object> deleteUser(@PathVariable(value="id") long id) {
         Optional<User> user0 = userRepository.findById(id);
         if(user0.isEmpty()) {
@@ -67,8 +73,9 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
+    @ApiOperation(value="Atualiza um usuário")
     public ResponseEntity<Object> updateUser(@PathVariable(value="id") long id,
-                                                @RequestBody @Valid UserRecordDto userRecordDto) {
+                                             @RequestBody @Valid UserRecordDto userRecordDto) {
         Optional<User> user0 = userRepository.findById(id);
         if(user0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");

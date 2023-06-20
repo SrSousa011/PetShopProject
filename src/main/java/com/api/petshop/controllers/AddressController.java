@@ -6,6 +6,7 @@ import com.api.petshop.dtos.AddressRecordDto;
 import com.api.petshop.dtos.UserRecordDto;
 import com.api.petshop.repositories.AddressRepository;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(value = "API REST Pets")
 public class AddressController {
     @Autowired
     AddressRepository addressRepository;
 
     @GetMapping("/addresses")
+    @ApiOperation(value = "Obtém todos os endereços")
     public ResponseEntity<List<Address>> getAllAddresses(){
         List<Address> addressList = addressRepository.findAll();
         if(!addressList.isEmpty()) {
@@ -39,6 +42,7 @@ public class AddressController {
     }
 
     @GetMapping("/address/{id}")
+    @ApiOperation(value = "Obtém um endereço por ID")
     public ResponseEntity<Object> getOneAddress(@PathVariable(value="id") long id){
         Optional<Address> address0 = addressRepository.findById(id);
         if(address0.isEmpty()) {
@@ -50,6 +54,7 @@ public class AddressController {
 
 
     @PostMapping("/addresses")
+    @ApiOperation(value = "Cria um novo endereço")
     public ResponseEntity<Address> saveAddress(@RequestBody @Valid AddressRecordDto addressRecordDto) {
         var address = new Address();
         BeanUtils.copyProperties(addressRecordDto, address);
@@ -58,6 +63,7 @@ public class AddressController {
 
 
     @DeleteMapping("/address/{id}")
+    @ApiOperation(value = "Exclui um endereço por ID")
     public ResponseEntity<Object> deleteAddress(@PathVariable(value="id") long id) {
         Optional<Address> address0 = addressRepository.findById(id);
         if(address0.isEmpty()) {
@@ -68,6 +74,7 @@ public class AddressController {
     }
 
     @PutMapping("/address/{id}")
+    @ApiOperation(value = "Atualiza um endereço por ID")
     public ResponseEntity<Object> updateAddress(@PathVariable(value="id") long id,
                                                 @RequestBody @Valid AddressRecordDto addressRecordDto) {
         Optional<Address> address0 = addressRepository.findById(id);

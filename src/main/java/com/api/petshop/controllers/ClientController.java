@@ -4,6 +4,7 @@ import com.api.petshop.domain.Client;
 import com.api.petshop.dtos.ClientRecordDto;
 import com.api.petshop.repositories.ClientRepository;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Api(value = "API REST Pets")
 public class ClientController {
     @Autowired
     ClientRepository clientRepository;
 
     @GetMapping("/clients")
+    @ApiOperation(value="Obtém todos os clientes")
     public ResponseEntity<List<Client>> getAllClients(){
         List<Client> clientList = clientRepository.findAll();
         if(!clientList.isEmpty()) {
@@ -37,6 +40,7 @@ public class ClientController {
     }
 
     @GetMapping("/client/{id}")
+    @ApiOperation(value = "Recebe um cliente por ID")
     public ResponseEntity<Object> getOneClient(@PathVariable(value="id") long id){
         Optional<Client> client0 = clientRepository.findById(id);
         if(client0.isEmpty()) {
@@ -48,6 +52,7 @@ public class ClientController {
 
 
     @PostMapping("/clients")
+    @ApiOperation(value = "Cria um novo cliente")
     public ResponseEntity<Client> saveClient(@RequestBody @Valid ClientRecordDto clientRecordDto) {
         var client = new Client();
         BeanUtils.copyProperties(clientRecordDto, client);
@@ -56,6 +61,7 @@ public class ClientController {
 
 
     @DeleteMapping("/client/{id}")
+    @ApiOperation(value = "Exclui um cliente por ID")
     public ResponseEntity<Object> deleteAddress(@PathVariable(value="id") long id) {
         Optional<Client> client0 = clientRepository.findById(id);
         if(client0.isEmpty()) {
@@ -66,6 +72,7 @@ public class ClientController {
     }
 
     @PutMapping("/client/{id}")
+    @ApiOperation(value = "Atualiza um cliente por ID")
     public ResponseEntity<Object> updateAddress(@PathVariable(value="id") long id,
                                                 @RequestBody @Valid ClientRecordDto clientRecordDto) {
         Optional<Client> client0 = clientRepository.findById(id);
