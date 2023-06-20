@@ -1,9 +1,15 @@
 package com.api.petshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_client")
 public class Client {
@@ -12,18 +18,6 @@ public class Client {
     private Long id;
 
     private String name;
-
-    public Client(Long id, String name, Address address, List<Contact> contacts, List<Pet> pets) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.contacts = contacts;
-        this.pets = pets;
-    }
-
-    public Client() {
-
-    }
 
     public Long getId() {
         return id;
@@ -41,20 +35,12 @@ public class Client {
         this.name = nome;
     }
 
-    public Address getEndereco() {
-        return address;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setEndereco(Address address) {
-        this.address = address;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
     public List<Pet> getPets() {
@@ -73,14 +59,16 @@ public class Client {
         this.contacts = contatos;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @Column(name = "address_id")
+    private Long addressId;
+    @OneToMany(mappedBy = "client")
     private List<Contact> contacts;
 
 
     @OneToMany(mappedBy = "owner")
     private List<Pet> pets;
 }
+
+
+
 

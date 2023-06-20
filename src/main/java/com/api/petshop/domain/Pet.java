@@ -1,8 +1,15 @@
 package com.api.petshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_pet")
 public class Pet {
@@ -17,23 +24,11 @@ public class Pet {
     private Client owner;
 
     @ManyToOne
-    @JoinColumn(name = "race_id")
+    @JoinColumn(name = "race_id_fk")
     private Race race;
 
     @OneToMany(mappedBy = "pet")
     private List<Service> services;
-
-    public Pet(Long pet_id, String name, Client owner, Race race, List<Service> services) {
-        this.pet_id = pet_id;
-        this.name = name;
-        this.owner = owner;
-        this.race = race;
-        this.services = services;
-    }
-
-    public Pet() {
-
-    }
 
     public Long getPet_id() {
         return pet_id;

@@ -50,9 +50,9 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRecordDto userRecordDto) {
-        var usuario = new User();
-        BeanUtils.copyProperties(userRecordDto, usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(usuario));
+        var user = new User();
+        BeanUtils.copyProperties(userRecordDto, user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
     }
 
 
@@ -73,8 +73,8 @@ public class UserController {
         if(user0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
         }
-        var usuario = user0.get();
-        BeanUtils.copyProperties(userRecordDto, usuario);
-        return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(usuario));
+        var user = user0.get();
+        BeanUtils.copyProperties(userRecordDto, user);
+        return ResponseEntity.status(HttpStatus.OK).body(userRepository.save(user));
     }
 }

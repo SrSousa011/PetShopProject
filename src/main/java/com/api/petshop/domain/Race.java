@@ -1,8 +1,15 @@
 package com.api.petshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_race")
 public class Race {
@@ -15,16 +22,6 @@ public class Race {
 
     @OneToMany(mappedBy = "race")
     private List<Pet> pets;
-
-    public Race(Long race_id, String name, List<Pet> pets) {
-        this.race_id = race_id;
-        this.name = name;
-        this.pets = pets;
-    }
-
-    public Race() {
-
-    }
 
     public Long getRace_id() {
         return race_id;

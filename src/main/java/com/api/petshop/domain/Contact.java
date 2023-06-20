@@ -1,7 +1,13 @@
 package com.api.petshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_contact")
 public class Contact {
@@ -10,17 +16,6 @@ public class Contact {
     private Long contact_id;
 
     private String email;
-
-
-    public Contact(Long contact_id, String email, Client client) {
-        this.contact_id = contact_id;
-        this.email = email;
-        this.client = client;
-    }
-
-    public Contact() {
-
-    }
 
     public Long getContact_id() {
         return contact_id;
@@ -47,7 +42,7 @@ public class Contact {
     }
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @JoinColumn(name = "cliente_id_fk")
     private Client client;
 }
 

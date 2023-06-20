@@ -1,8 +1,15 @@
 package com.api.petshop.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbl_service")
 public class Service {
@@ -16,16 +23,6 @@ public class Service {
     @ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
-
-    public Service(Long service_id, Date date, Pet pet) {
-        this.service_id = service_id;
-        this.date = date;
-        this.pet = pet;
-    }
-
-    public Service() {
-
-    }
 
     public Long getService_id() {
         return service_id;
