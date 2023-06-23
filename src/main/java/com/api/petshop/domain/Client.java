@@ -48,8 +48,6 @@ public class Client extends RepresentationModel<Client> implements Serializable 
         this.address = address;
     }
 
-
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
     private List<Address> address;
 }
