@@ -1,6 +1,8 @@
 package com.api.petshop.controllers;
 
+import com.api.petshop.domain.Address;
 import com.api.petshop.domain.Client;
+import com.api.petshop.dtos.AddressRecordDto;
 import com.api.petshop.dtos.ClientRecordDto;
 import com.api.petshop.repositories.ClientRepository;
 import io.swagger.annotations.Api;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +28,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ClientController {
     @Autowired
     ClientRepository clientRepository;
+
+    public ClientController(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     @GetMapping("/clients")
     @ApiOperation(value="Obtém todos os clientes")
@@ -58,6 +65,8 @@ public class ClientController {
         BeanUtils.copyProperties(clientRecordDto, client);
         return ResponseEntity.status(HttpStatus.CREATED).body(clientRepository.save(client));
     }
+
+
 
 
     @DeleteMapping("/client/{id}")

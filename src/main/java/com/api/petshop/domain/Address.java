@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +21,6 @@ public class Address extends RepresentationModel<Address> implements Serializabl
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long address_Id;
 
     private String street;
@@ -28,12 +28,6 @@ public class Address extends RepresentationModel<Address> implements Serializabl
     private String state;
     private String postalCode;
     private String country;
-
-    @JsonIgnore
-    @ElementCollection
-    @CollectionTable(name = "address_clients", joinColumns = @JoinColumn(name = "address_id"))
-    @Column(name = "client_id")
-    private List<Long> clientIds;
     public Long getAddress_Id() {
         return address_Id;
     }
@@ -82,11 +76,17 @@ public class Address extends RepresentationModel<Address> implements Serializabl
         this.country = country;
     }
 
-    public List<Long> getClientIds() {
-        return clientIds;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientIds(List<Long> clientIds) {
-        this.clientIds = clientIds;
+    public void setClient(Client client) {
+        this.client = client;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    @JsonIgnore
+    private Client client;
+
 }

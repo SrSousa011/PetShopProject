@@ -1,5 +1,6 @@
 package com.api.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -38,38 +40,18 @@ public class Client extends RepresentationModel<Client> implements Serializable 
         this.name = nome;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public List<Address> getAddress() {
+        return address;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddresses(List<Address> address) {
+        this.address = address;
     }
 
-    public List<Pet> getPets() {
-        return pets;
-    }
 
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
-    }
-
-    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<Contact> contatos) {
-        this.contacts = contatos;
-    }
-
-    @Column(name = "address_id")
-    private Long addressId;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
-    private List<Contact> contacts;
-
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
-    private List<Pet> pets;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
+    private List<Address> address;
 }
 
 
