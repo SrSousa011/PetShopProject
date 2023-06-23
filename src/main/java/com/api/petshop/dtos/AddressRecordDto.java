@@ -6,12 +6,10 @@ import jakarta.validation.constraints.NotNull;
 public record AddressRecordDto(
         long address_Id,
         String street,
-
         String city,
         String state,
         String postalCode,
         String country,
-
         long clientIds
 ) {
 }
