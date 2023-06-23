@@ -8,6 +8,6 @@ import java.util.List;
 public record ClientRecordDto(
         long client_id,
         String name,
-        List<Address> addresses
+        List<Address> address
 ) {
 }
