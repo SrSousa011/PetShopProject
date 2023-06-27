@@ -12,10 +12,6 @@ public record AddressRecordDto(
         String state,
         String postalCode,
         String country,
-        ClientRecordDto client
+        long client_id
 ) {
-
-    public Address toEntity() {
-        return new Address(street, city, state, postalCode, country);
-    }
 }

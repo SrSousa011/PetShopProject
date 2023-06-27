@@ -16,7 +16,9 @@ import org.springframework.hateoas.RepresentationModel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -39,12 +41,17 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date_register")
     private LocalDate date_register;
-
+/*
     @JsonIgnoreProperties("client")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="fk_address_client",foreignKey = @ForeignKey(name = "fk_address_client"))
     @JsonManagedReference
     private List<Address> address = new ArrayList<>();
+
+*/
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Address> address = new HashSet<>();
 
 }
 
