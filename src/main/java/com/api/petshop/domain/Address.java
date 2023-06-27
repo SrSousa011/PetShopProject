@@ -30,15 +30,6 @@ public class Address extends RepresentationModel<Address> implements Serializabl
     private String postalCode;
     private String country;
 
-    /*
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_address_client", foreignKey = @ForeignKey(name = "fk_address_client"))
-    @JsonBackReference
-    private Client client;
-
- */
-
 
     @ManyToOne(cascade = CascadeType.REFRESH) @JoinColumn(name = "client_id")
     protected Client client;

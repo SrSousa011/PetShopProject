@@ -41,14 +41,6 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date_register")
     private LocalDate date_register;
-/*
-    @JsonIgnoreProperties("client")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name="fk_address_client",foreignKey = @ForeignKey(name = "fk_address_client"))
-    @JsonManagedReference
-    private List<Address> address = new ArrayList<>();
-
-*/
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> address = new HashSet<>();
