@@ -3,6 +3,7 @@ package com.api.petshop.controllers;
 import com.api.petshop.domain.User;
 import com.api.petshop.dtos.UserRecordDto;
 import com.api.petshop.repositories.UserRepository;
+import com.api.petshop.swagger.AuthorizationInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
@@ -26,7 +27,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserController {
     @Autowired
     UserRepository userRepository;
-
+    @AuthorizationInfo
     @GetMapping("/users")
     @ApiOperation(value="Retorna uma lista de usuários")
     public ResponseEntity<List<User>> getAllUsers(){
@@ -39,7 +40,7 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(userList);
     }
-
+    @AuthorizationInfo
     @GetMapping("/user/{id}")
     @ApiOperation(value="Retorna um usuário pelo ID")
     public ResponseEntity<Object> getOneUser(@PathVariable(value="id") long id){
@@ -51,7 +52,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(user0.get());
     }
 
-
+    @AuthorizationInfo
     @PostMapping("/users")
     @ApiOperation(value="Cria um novo usuário")
     public ResponseEntity<User> saveUser(@RequestBody @Valid UserRecordDto userRecordDto) {
@@ -60,7 +61,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
     }
 
-
+    @AuthorizationInfo
     @DeleteMapping("/user/{id}")
     @ApiOperation(value="Exclui um usuário")
     public ResponseEntity<Object> deleteUser(@PathVariable(value="id") long id) {
@@ -71,7 +72,7 @@ public class UserController {
         userRepository.delete(user0.get());
         return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
     }
-
+    @AuthorizationInfo
     @PutMapping("/user/{id}")
     @ApiOperation(value="Atualiza um usuário")
     public ResponseEntity<Object> updateUser(@PathVariable(value="id") long id,

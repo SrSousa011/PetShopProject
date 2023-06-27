@@ -5,6 +5,7 @@ import com.api.petshop.domain.Client;
 import com.api.petshop.dtos.AddressRecordDto;
 import com.api.petshop.dtos.ClientRecordDto;
 import com.api.petshop.repositories.ClientRepository;
+import com.api.petshop.swagger.AuthorizationInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
@@ -32,7 +33,7 @@ public class ClientController {
     public ClientController(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
-
+    @AuthorizationInfo
     @GetMapping("/clients")
     @ApiOperation(value="Obtém todos os clientes")
     public ResponseEntity<List<Client>> getAllClients(){
@@ -45,7 +46,7 @@ public class ClientController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(clientList);
     }
-
+    @AuthorizationInfo
     @GetMapping("/client/{id}")
     @ApiOperation(value = "Recebe um cliente por ID")
     public ResponseEntity<Object> getOneClient(@PathVariable(value="id") long id){
@@ -57,7 +58,7 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.OK).body(client0.get());
     }
 
-
+    @AuthorizationInfo
     @PostMapping("/clients")
     @ApiOperation(value = "Cria um novo cliente")
     public ResponseEntity<Client> saveClient(@RequestBody @Valid ClientRecordDto clientRecordDto) {
@@ -68,7 +69,7 @@ public class ClientController {
 
 
 
-
+    @AuthorizationInfo
     @DeleteMapping("/client/{id}")
     @ApiOperation(value = "Exclui um cliente por ID")
     public ResponseEntity<Object> deleteAddress(@PathVariable(value="id") long id) {
@@ -79,7 +80,7 @@ public class ClientController {
         clientRepository.delete(client0.get());
         return ResponseEntity.status(HttpStatus.OK).body("Client deleted successfully.");
     }
-
+    @AuthorizationInfo
     @PutMapping("/client/{id}")
     @ApiOperation(value = "Atualiza um cliente por ID")
     public ResponseEntity<Object> updateAddress(@PathVariable(value="id") long id,
