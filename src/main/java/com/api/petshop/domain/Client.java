@@ -1,15 +1,23 @@
 package com.api.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -24,32 +32,20 @@ public class Client extends RepresentationModel<Client> implements Serializable 
 
     private String name;
 
-    public Long getClient_id() {
-        return client_id;
-    }
+    //@CPF
+    @Column(name = "cpf")
+    private String cpf;
 
-    public void setClient_id(Long id) {
-        this.client_id = id;
-    }
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "date_register")
+    private LocalDate date_register;
 
-    public String getName() {
-        return name;
-    }
+    @JsonIgnoreProperties("client")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name="fk_address_client",foreignKey = @ForeignKey(name = "fk_address_client"))
+    @JsonManagedReference
+    private List<Address> address = new ArrayList<>();
 
-    public void setName(String nome) {
-        this.name = nome;
-    }
-
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddresses(List<Address> address) {
-        this.address = address;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
-    private List<Address> address;
 }
 
 
