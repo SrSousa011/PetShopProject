@@ -42,60 +42,10 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @Column(name = "date_register")
     private LocalDate date_register;
 
-    public Long getClient_id() {
-        return client_id;
-    }
-
-    public void setClient_id(Long client_id) {
-        this.client_id = client_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDate getDate_register() {
-        return date_register;
-    }
-
-    public void setDate_register(LocalDate date_register) {
-        this.date_register = date_register;
-    }
-
-    public Set<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(Set<Address> address) {
-        this.address = address;
-    }
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "client")
     @JsonManagedReference
     private Set<Address> address = new HashSet<>();
-
-    public void addAddress(Address address) {
-        address.setClient(this); // Definir o cliente no endereço
-        this.address.add(address);
-    }
-
-    public void removeAddress(Address address) {
-        address.setClient(null); // Remover a referência ao cliente no endereço
-        this.address.remove(address);
-    }
 
 }
 
