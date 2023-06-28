@@ -1,8 +1,7 @@
 package com.api.petshop.controllers;
 
-import com.api.petshop.domain.Address;
+
 import com.api.petshop.domain.Client;
-import com.api.petshop.dtos.AddressRecordDto;
 import com.api.petshop.dtos.ClientRecordDto;
 import com.api.petshop.repositories.ClientRepository;
 import com.api.petshop.swagger.AuthorizationInfo;
@@ -15,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

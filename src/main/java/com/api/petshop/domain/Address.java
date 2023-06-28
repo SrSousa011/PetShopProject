@@ -29,9 +29,8 @@ public class Address extends RepresentationModel<Address> implements Serializabl
     private String state;
     private String postalCode;
     private String country;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client")
     @JsonBackReference
     private Client client;
 }
