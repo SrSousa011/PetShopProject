@@ -34,7 +34,7 @@ public class Client extends RepresentationModel<Client> implements Serializable 
 
     private String name;
 
-    //@CPF
+
     @Column(name = "cpf")
     private String cpf;
 
