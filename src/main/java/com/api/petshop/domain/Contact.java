@@ -1,6 +1,7 @@
 package com.api.petshop.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -22,11 +25,10 @@ public class Contact extends RepresentationModel<Contact> implements Serializabl
 
     private String email;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client")
-    @JsonBackReference
-    private Client client;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id")
+    @JsonManagedReference
+    private Set<Address> address = new HashSet<>();
 }
 
 

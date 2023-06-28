@@ -47,11 +47,6 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @JsonManagedReference
     private Set<Address> address = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id")
-    @JsonManagedReference
-    private Set<Contact> contact = new HashSet<>();
-
 }
 
 

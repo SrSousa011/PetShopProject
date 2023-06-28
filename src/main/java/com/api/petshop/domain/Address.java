@@ -33,6 +33,10 @@ public class Address extends RepresentationModel<Address> implements Serializabl
     @JoinColumn(name = "client")
     @JsonBackReference
     private Client client;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contact")
+    @JsonBackReference
+    private Contact contact;
 }
 
 
