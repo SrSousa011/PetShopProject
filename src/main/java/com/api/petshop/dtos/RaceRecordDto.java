@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 public class RaceRecordDto {
     private Long race_id;
     private String name;
+
+    private Long pet_id;
 }
