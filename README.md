@@ -64,3 +64,37 @@ $ mvn spring-boot:run
 
 ## Request With Token
 ![Postman-Home](/screenshots/postman-success-response.png "Postman")
+
+
+
+Prossiga com as seguintes relações:
+
+User:
+
+@OneToMany com Client (User possui vários Client)
+
+
+Client:
+
+@OneToMany com Address (User possui vários Address)
+@OneToMany com Contact (User possui vários Contact)
+@OneToMany com Pet (Client possui vários Pet)
+@OneToMany com Service (Client possui vários Service)
+@ManyToOne com User (Client pertence a um User)
+
+
+Pet:
+
+@ManyToOne com Race (Pet pertence a uma Race)
+@ManyToOne com Client (Pet pertence a um Client)
+
+Address:
+
+@ManyToOne com User (Address pertence a um User)
+Contact:
+
+@ManyToOne com User (Contact pertence a um User)
+
+Service:
+
+@ManyToOne com Client (Service pertence a um Client)

@@ -24,6 +24,11 @@ public class Contact extends RepresentationModel<Contact> implements Serializabl
     private Long contact_id;
 
     private String email;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client")
+    @JsonBackReference
+    private Client client;
 }
 
 
