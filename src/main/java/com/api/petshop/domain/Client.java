@@ -25,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_client")
+@Table(name = "tbl_clients")
 public class Client extends RepresentationModel<Client> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

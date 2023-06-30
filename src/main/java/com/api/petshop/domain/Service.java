@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_service")
+@Table(name = "tbl_services")
 public class Service extends RepresentationModel<Service> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

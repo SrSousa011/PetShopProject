@@ -14,7 +14,7 @@ import org.springframework.hateoas.RepresentationModel;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "tbl_users")
 public class User extends RepresentationModel<User> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

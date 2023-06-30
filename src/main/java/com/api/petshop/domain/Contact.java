@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_contact")
+@Table(name = "tbl_contacts")
 public class Contact extends RepresentationModel<Contact> implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

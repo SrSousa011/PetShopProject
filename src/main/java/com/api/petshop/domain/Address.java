@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tbl_address")
+@Table(name = "tbl_addresses")
 public class Address extends RepresentationModel<Address> implements Serializable {
     private static final long serialVersionUID = 1L;
 

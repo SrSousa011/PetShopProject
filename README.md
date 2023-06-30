@@ -66,16 +66,15 @@ $ mvn spring-boot:run
 ![Postman-Home](/screenshots/postman-success-response.png "Postman")
 
 
+Ligação de Entidades:
 
-Prossiga com as seguintes relações:
+
 
 User:
-
 @OneToMany com Client (User possui vários Client)
 
 
 Client:
-
 @OneToMany com Address (User possui vários Address)
 @OneToMany com Contact (User possui vários Contact)
 @OneToMany com Pet (Client possui vários Pet)
@@ -84,17 +83,14 @@ Client:
 
 
 Pet:
-
 @ManyToOne com Race (Pet pertence a uma Race)
 @ManyToOne com Client (Pet pertence a um Client)
 
 Address:
+@ManyToOne com User (Address pertence a um Client)
 
-@ManyToOne com User (Address pertence a um User)
 Contact:
-
-@ManyToOne com User (Contact pertence a um User)
+@ManyToOne com User (Contact pertence a um Client)
 
 Service:
-
 @ManyToOne com Client (Service pertence a um Client)
