@@ -1,9 +1,6 @@
 package com.api.petshop.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,6 +48,11 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     @JoinColumn(name = "client_id")
     @JsonManagedReference
     private Set<Contact> contact = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
+    @JsonManagedReference
+    private Set<Pet> pet = new HashSet<>();
 
 }
 

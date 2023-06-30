@@ -1,5 +1,6 @@
 package com.api.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,10 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     @JoinColumn(name = "pet_id")
     @JsonManagedReference
     private Set<Race> race = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client")
+    @JsonBackReference
+    private Client client;
 }
 
 

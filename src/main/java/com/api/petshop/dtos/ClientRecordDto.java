@@ -3,6 +3,7 @@ package com.api.petshop.dtos;
 
 import com.api.petshop.domain.Address;
 import com.api.petshop.domain.Contact;
+import com.api.petshop.domain.Pet;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public record ClientRecordDto(
         @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate date_register,
         Set<Address> address,
-        Set<Contact> contact
+        Set<Contact> contact,
+        Set<Pet> pet
 ) {
 }
