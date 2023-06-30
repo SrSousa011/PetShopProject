@@ -13,10 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServiceRecordDto {
-    @NotEmpty(message = "Name is required")
+    //@NotEmpty(message = "Name is required")
     private String name;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull(message = "Date is required")
+    //@NotNull(message = "Date is required")
     private LocalDate date;
+
+    private Long pet_id;
 }

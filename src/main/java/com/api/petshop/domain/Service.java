@@ -1,5 +1,6 @@
 package com.api.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,33 +22,10 @@ public class Service extends RepresentationModel<Service> implements Serializabl
     @Column(name = "id")
     private Long service_id;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id")
     private Pet pet;
-
-    public Long getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(Long id) {
-        this.service_id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
 }

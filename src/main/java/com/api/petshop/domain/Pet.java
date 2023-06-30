@@ -24,15 +24,15 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     private Long pet_id;
 
     private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client")
+    @JsonBackReference
+    private Client client;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pet_id")
     @JsonManagedReference
     private Set<Race> race = new HashSet<>();
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client")
-    @JsonBackReference
-    private Client client;
 }
 
 
