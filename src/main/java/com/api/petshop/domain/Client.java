@@ -43,7 +43,7 @@ public class Client extends RepresentationModel<Client> implements Serializable 
     private LocalDate date_register;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client")
     @JsonManagedReference
     private Set<Address> address = new HashSet<>();
 

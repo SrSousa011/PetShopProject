@@ -9,6 +9,6 @@ public record AddressRecordDto(
         String state,
         String postalCode,
         String country,
-        Client client_id
+        ClientRecordDto client_id
 ) {
 }

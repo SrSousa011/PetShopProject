@@ -1,9 +1,7 @@
 package com.api.petshop.controllers;
 
 import com.api.petshop.domain.Address;
-import com.api.petshop.domain.User;
 import com.api.petshop.dtos.AddressRecordDto;
-import com.api.petshop.dtos.UserRecordDto;
 import com.api.petshop.repositories.AddressRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

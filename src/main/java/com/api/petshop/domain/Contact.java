@@ -24,11 +24,6 @@ public class Contact extends RepresentationModel<Contact> implements Serializabl
     private Long contact_id;
 
     private String email;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id")
-    @JsonManagedReference
-    private Set<Address> address = new HashSet<>();
 }
 
 

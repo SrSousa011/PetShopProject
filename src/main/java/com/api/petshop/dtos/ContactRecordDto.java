@@ -6,8 +6,6 @@ import java.util.Set;
 
 public record ContactRecordDto(
         long contact_id,
-        String email,
-        ClientRecordDto client,
-        Set<Address> address
+        String email
 ) {
 }
