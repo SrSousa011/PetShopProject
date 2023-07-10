@@ -22,4 +22,5 @@ public class ServiceRecordDto {
     //@NotNull(message = "Date is required")
     private LocalDate date;
     private Long pet_id ;
+
 }

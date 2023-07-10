@@ -35,10 +35,10 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     @JsonManagedReference
     private Set<Race> race = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "service_id")
+    @OneToMany(mappedBy = "pet",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Service> service = new HashSet<>();
 }
+
 
 
