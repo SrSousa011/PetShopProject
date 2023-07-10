@@ -24,6 +24,39 @@ public class Pet extends RepresentationModel<Pet> implements Serializable {
     private Long pet_id;
 
     private String name;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Long getPet_id() {
+        return pet_id;
+    }
+
+    public void setPet_id(Long pet_id) {
+        this.pet_id = pet_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Race> getRace() {
+        return race;
+    }
+
+    public void setRace(Set<Race> race) {
+        this.race = race;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client")
     @JsonBackReference

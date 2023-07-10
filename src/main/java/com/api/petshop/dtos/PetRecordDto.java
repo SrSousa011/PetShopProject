@@ -17,5 +17,5 @@ public class PetRecordDto {
     private String name;
     private Client owner;
     private Set<Race> race;
-    private Set<Service> serice;
+    private Set<Service> service;
 }

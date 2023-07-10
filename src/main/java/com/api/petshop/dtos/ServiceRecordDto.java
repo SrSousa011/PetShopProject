@@ -1,5 +1,6 @@
 package com.api.petshop.dtos;
 
+import com.api.petshop.domain.Pet;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +21,5 @@ public class ServiceRecordDto {
     @JsonFormat(pattern = "dd/MM/yyyy")
     //@NotNull(message = "Date is required")
     private LocalDate date;
-
-    private Long pet_id;
+    private Long pet_id ;
 }
